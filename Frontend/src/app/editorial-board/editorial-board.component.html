@@ -1,0 +1,60 @@
+<div class="editorial-container">
+  <h2 class="text-center text-danger mb-4">Editorial Board</h2>
+
+  <!-- Editor in Chief -->
+  <div class="card mb-4 shadow-sm" *ngIf="editorInChief">
+    <div class="card-body">
+      <h5 class="card-title heading-black">Editor in Chief</h5>
+      <p class="card-text mb-1"><strong>{{ editorInChief.name }}</strong></p>
+      <p class="card-text text-muted">{{ editorInChief.designation }}</p>
+
+    </div>
+  </div>
+
+  <!-- Editorial Advisors -->
+  <div class="card mb-4 shadow-sm" *ngIf="advisors.length > 0">
+    <div class="card-body">
+      <h5 class="card-title heading-black">Editorial Advisors</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let advisor of advisors">
+          <strong>{{ advisor.name }}</strong> <span class="text-muted">– {{ advisor.designation }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Editorial Board Members -->
+  <div class="card mb-4 shadow-sm" *ngIf="boardMembers.length > 0">
+    <div class="card-body">
+      <h5 class="card-title heading-black">Editorial Board Members</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let member of boardMembers">
+          <strong>{{ member.name }}</strong> <span class="text-muted">– {{ member.designation }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Editorial Assistant -->
+  <div class="card mb-4 shadow-sm" *ngIf="editorialAssistant">
+    <div class="card-body">
+      <h5 class="card-title heading-black">Editorial Assistant</h5>
+      <p class="card-text mb-1"><strong>{{ editorialAssistant.name }}</strong></p>
+      <p class="card-text text-muted">{{ editorialAssistant.designation }}</p>
+      <p class="card-text" *ngIf="editorialAssistant.email">
+        <i class="bi bi-envelope-fill"></i> {{ editorialAssistant.email }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Language & Technical Editors -->
+  <div class="card mb-4 shadow-sm" *ngIf="langEditors.length > 0">
+    <div class="card-body">
+      <h5 class="card-title heading-black">Language & Technical Editors</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let editor of langEditors">
+          <strong>{{ editor.name }}</strong> <span class="text-muted">– {{ editor.designation }}</span>
+        </li>
+      </ul>
+    </div>
+</div>

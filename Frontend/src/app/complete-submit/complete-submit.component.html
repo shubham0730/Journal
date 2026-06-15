@@ -1,0 +1,71 @@
+<div class="submission-container">
+  <h2>Review and Submit</h2>
+  
+  <div class="submission-sections">
+    <div class="section">
+      <div class="section-header">
+        <span class="status-circle"></span>
+        <span>File(s) Uploaded</span>
+        <button class="modify-btn">MODIFY</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="status-circle"></span>
+        <span>Type, Title, & Abstract</span>
+        <button class="modify-btn">MODIFY</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="status-circle"></span>
+        <span>Authors & Institutions</span>
+        <button class="modify-btn">MODIFY</button>
+      </div>
+    </div>
+
+    
+
+    
+  </div>
+
+ 
+
+  <form [formGroup]="submissionForm" (ngSubmit)="onSubmit()">
+    
+
+    <div class="conflict-section">
+      <h3>Declaration of Conflict of Interest</h3>
+      <p>Are you aware of any conflicts of interest that may arise between your authors and this journal?</p>
+      <p class="info-text">A conflict of interest, or competing interest, is anything that may or may be perceived to influence the authors work. Conflicts of interest typically stem from financial, personnel, or professional relationships, but may have other sources as well. Declaration of Conflict of Interest statements are published with each article.</p>
+      
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" formControlName="conflictOfInterest" value="yes" id="conflict-yes">
+          <label for="conflict-yes">Yes</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" formControlName="conflictOfInterest" value="no" id="conflict-no">
+          <label for="conflict-no">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright-section">
+      <h3>Copyright Agreement</h3>
+      <p>Please click here to review the <a href="#">Copyright Form</a> and agree to the terms and conditions.</p>
+    </div>
+
+    <div class="checkbox-container">
+      <input type="checkbox" formControlName="agreementConfirmed" id="agreement-confirm">
+      <label for="agreement-confirm">I hereby confirm that I have read, understood, and agreed to the submission guidelines, policies and submission declaration of the journal.</label>
+    </div>
+
+    <div class="button-container">
+      <button type="button" class="save-btn">EXIT</button>
+      <button type="submit" class="submit-btn" [disabled]="!submissionForm.valid">SUBMIT</button>
+    </div>
+  </form>
+</div>

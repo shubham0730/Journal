@@ -1,0 +1,284 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+
+    <!-- STEP 1: PAPER DETAILS -->
+    <mat-step [stepControl]="articleForm">
+        <form [formGroup]="articleForm">
+            <ng-template matStepLabel>Paper Details</ng-template>
+            <h3>Resubmit Paper</h3>
+
+            <!-- Article Type -->
+            <mat-form-field class="w-100">
+                <mat-label>Article Type</mat-label>
+                <mat-select formControlName="articleType" required>
+                    <mat-option *ngFor="let type of articleTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Title -->
+            <mat-form-field class="w-100">
+                <mat-label>Title</mat-label>
+                <textarea matInput formControlName="title" maxlength="500"></textarea>
+            </mat-form-field>
+
+            <!-- Resubmission Notes -->
+            <mat-form-field class="w-100">
+                <mat-label>Resubmission Notes</mat-label>
+                <textarea matInput formControlName="resubmissionNotes" maxlength="2000"
+                    placeholder="Describe changes made since last submission"></textarea>
+            </mat-form-field>
+
+            <!-- Abstract -->
+            <mat-form-field class="w-100">
+                <mat-label>Abstract</mat-label>
+                <textarea matInput formControlName="abstract" maxlength="5000"
+                    placeholder="Provide the abstract here"></textarea>
+            </mat-form-field>
+
+            <!-- Word Count -->
+            <mat-form-field class="w-100">
+                <mat-label>Word Count</mat-label>
+                <input matInput type="number" formControlName="wordCount" placeholder="Enter word count">
+            </mat-form-field>
+
+            <!-- Black & White Figures -->
+            <mat-form-field class="w-100">
+                <mat-label>Black & White Figures</mat-label>
+                <input matInput type="number" formControlName="bwFigures"
+                    placeholder="Enter number of black & white figures">
+            </mat-form-field>
+
+            <!-- Color Figures -->
+            <mat-form-field class="w-100">
+                <mat-label>Color Figures</mat-label>
+                <input matInput type="number" formControlName="colorFigures"
+                    placeholder="Enter number of color figures">
+            </mat-form-field>
+
+            <!-- Tables -->
+            <mat-form-field class="w-100">
+                <mat-label>Tables</mat-label>
+                <input matInput type="number" formControlName="tables" placeholder="Enter number of tables">
+            </mat-form-field>
+
+            <!-- Pages -->
+            <mat-form-field class="w-100">
+                <mat-label>Pages</mat-label>
+                <input matInput type="number" formControlName="pages" placeholder="Enter number of pages">
+            </mat-form-field>
+
+            <!-- Keywords -->
+            <mat-form-field class="w-100">
+                <mat-label>Keywords *</mat-label>
+                <input matInput formControlName="keywords" placeholder="Minimum 3 keywords, comma separated">
+            </mat-form-field>
+
+            <!-- Trial Registration Number -->
+            <mat-form-field class="w-100">
+                <mat-label>Trial Registration Number</mat-label>
+                <input matInput formControlName="trialRegistrationNumber">
+            </mat-form-field>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-end">
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <!-- STEP 2: AUTHORS -->
+    <mat-step [stepControl]="authorsForm">
+        <ng-template matStepLabel>Authors</ng-template>
+        <h3>Authors & Institutions (Resubmission)</h3>
+
+        <mat-card class="mb-3">
+            <mat-card-content>
+                <p class="text-warning">⚠ You cannot add new authors during resubmission. You may only edit existing
+                    details.</p>
+            </mat-card-content>
+        </mat-card>
+
+        <form [formGroup]="authorsForm">
+            <div formArrayName="authors">
+                <div *ngFor="let authorGroup of authorsArray.controls; let i = index" [formGroupName]="i"
+                    [formGroupName]="i" class="mb-4 border p-3 rounded">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Title *</mat-label>
+                                <input matInput formControlName="title" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>First Name *</mat-label>
+                                <input matInput formControlName="firstName" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput formControlName="middleName">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Last Name *</mat-label>
+                                <input matInput formControlName="lastName" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Email *</mat-label>
+                                <input matInput formControlName="email" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Department *</mat-label>
+                                <input matInput formControlName="department">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Institution *</mat-label>
+                                <input matInput formControlName="institution" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>State</mat-label>
+                                <input matInput formControlName="state">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Country</mat-label>
+                                <input matInput formControlName="country">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>ORCID</mat-label>
+                                <input matInput formControlName="orcid">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <mat-checkbox formControlName="isCorrespondingAuthor"
+                                (change)="onCorrespondingAuthorChange(i)">
+                                Is Corresponding Author?
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+
+    <!-- STEP 3: UPLOAD FILES -->
+    <!-- STEP 3: UPLOAD FILES -->
+    <mat-step>
+        <ng-template matStepLabel>Upload Files</ng-template>
+        <h3>Upload Revised Files</h3>
+
+        <mat-card class="mb-3">
+            <mat-card-content>
+                <ul>
+                    <li>Upload revised manuscript as “Main Article”.</li>
+                    <li>Figures/Tables can be replaced or updated.</li>
+                    <li>First Page file is not editable during resubmission.</li>
+                </ul>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- File Upload Section (from Initial Component) -->
+        <div class="upload-container">
+            <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (click)="fileInput.click()">
+                <div class="drop-zone-content">
+                    <span class="plus-icon">+</span>
+                    <p>Drag and drop file here, or click to select file</p>
+                </div>
+            </div>
+            <input #fileInput type="file" (change)="onFileSelected($event)" accept=".doc,.docx,.jpg,.png"
+                style="display: none" />
+
+            <!-- Uploaded Files Table -->
+            <div class="uploaded-files" *ngIf="uploadedFiles.length">
+                <h4>Uploaded Files</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>File Name</th>
+                            <th>File Type</th>
+                            <th>Legend</th>
+                            <th>File Size</th>
+                            <th>File Order</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let file of uploadedFiles; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ file.fileName }}</td>
+                            <td>
+                                <select [(ngModel)]="file.fileType">
+                                    <option value="">Select File Type</option>
+                                    <option value="First Page">First Page</option>
+                                    <option value="Main Article">Main Article</option>
+                                    <option value="Supplementary">Supplementary</option>
+                                    <option value="Images">Images</option>
+                                </select>
+                            </td>
+                            <td><input type="text" [(ngModel)]="file.legend"></td>
+                            <td>{{ file.fileSize }}</td>
+                            <td><input type="number" [(ngModel)]="file.fileOrder" min="1"></td>
+                            <td class="actions">
+                                <button (click)="previewFile(file)" title="Preview">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button (click)="deleteFile(file)" title="Delete">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="d-flex justify-content-between mt-3">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+
+
+    <!-- STEP 4: CONFIRM -->
+    <mat-step>
+        <ng-template matStepLabel>Confirm</ng-template>
+        <h3>Confirm Resubmission</h3>
+        <p>✅ Please review all details before final resubmission.</p>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="accent" (click)="finalResubmit()">Submit Resubmission</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

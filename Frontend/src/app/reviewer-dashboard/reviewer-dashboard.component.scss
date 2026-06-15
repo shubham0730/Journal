@@ -1,0 +1,77 @@
+.with-margin {
+    margin: 80px; /* Adds margin from all sides */
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  // Action Buttons
+  .btn {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+  }
+  
+  // Outlined Button (White BG, Black Text)
+  .btn-outline-secondary {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+  
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+  }
+  
+  // Danger Button (Red BG, White Text)
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+  
+    &:hover {
+        background-color: #b02a37; // Darker red on hover
+        color: #fff;
+    }
+  }
+  
+  // Wrapper for buttons and table
+  .action-container {
+    display: flex;
+    align-items: center; // Aligns buttons vertically with the table
+    justify-content: space-between; // Ensures spacing between elements
+    margin: 15px; // Adds margin from all sides to prevent sticking
+  }
+  
+  // Button Styles (Consistent Padding)
+  .approve-btn,
+  .reject-btn {
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 2.5 rem;
+    font-weight: bold;
+  }
+  
+  .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); // Semi-transparent background
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; // Ensure it's above all elements
+  }
+  
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 4px;
+  }
+  

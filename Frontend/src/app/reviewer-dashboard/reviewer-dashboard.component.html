@@ -1,0 +1,66 @@
+<!-- Full-Screen Loader
+<div *ngIf="isLoading" class="loader-overlay">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+   -->
+  <app-tab-bar [tabs]="['View Reviewers', 'Approve Reviewers']" (tabChange)="onTabChange($event)"></app-tab-bar>
+  
+  <!-- View Editors Tab -->
+  <div *ngIf="activeTab === 0">
+    <div *ngIf="approvedReviewersRows.length === 0" class="no-data text-center">
+      <p class="text-muted">No approved editors available.</p>
+    </div>
+  
+    <app-edit-tablegrid
+      *ngIf="approvedReviewersRows.length > 0"
+      [columns]="viewColumns"
+      [rows]="approvedReviewersRows"
+      [enableSelection]="viewEnableSelection">
+    </app-edit-tablegrid>
+    <app-pagination 
+  [offset]="offsetApproved" 
+  [totalPagesApproved]="totalPagesApproved" 
+  (offsetChange)="onOffsetPendingChange($event)">
+  </app-pagination>
+  </div>
+  
+  <!-- Approve Editors Tab -->
+  <div *ngIf="activeTab === 1">
+    <div *ngIf="reviewersRows.length === 0" class="no-data text-center">
+      <p class="text-muted">No editors pending approval.</p>
+    </div>
+  
+    <!-- Action Buttons + Table Wrapper -->
+    <div *ngIf="reviewersRows.length > 0" class="action-container">
+      <div class="d-flex gap-3">
+        <button 
+          class="btn btn-outline-secondary approve-btn" 
+          (click)="approveReviewer()" 
+          [disabled]="!hasSelectedReviewers()">
+          Approve
+        </button>
+  
+        <button 
+          class="btn btn-danger reject-btn" 
+          (click)="rejectReviewer()" 
+          [disabled]="!hasSelectedReviewers()">
+          Reject
+        </button>
+      </div>
+    </div>
+  
+    <app-edit-tablegrid
+      *ngIf="reviewersRows.length > 0"
+      [columns]="approveColumns"
+      [rows]="reviewersRows"
+      [enableSelection]="approveEnableSelection">
+    </app-edit-tablegrid>
+    <app-pagination 
+  [offset]="offsetPending" 
+  [totalPagesApproved]="totalPagesPending" 
+  (offsetChange)="onOffsetPendingChange($event)">
+    </app-pagination>
+  </div>
+  

@@ -1,0 +1,102 @@
+<div class="container">
+  <!-- Search Input -->
+  <div class="position-relative mb-4">
+    <input
+      [(ngModel)]="filterText"
+      (input)="updateFilteredRows()"
+      placeholder="Search..."
+      class="form-control search-input w-25"
+    />
+    <i class="bi bi-search search-icon"></i>
+    <!-- Bootstrap Icons -->
+  </div>
+
+  <!-- Table -->
+  <table class="table table-hover align-middle bg-white shadow-sm rounded">
+    <thead class="bg-light">
+      <tr>
+        <!-- Selection Checkbox -->
+        <th *ngIf="enableSelection" class="text-center">
+          <input
+            type="checkbox"
+            (change)="toggleSelectAll($event)"
+            [checked]="allSelected"
+          />
+        </th>
+        <th *ngFor="let column of columns" class="text-center">
+          {{ column.header }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of filteredRows">
+        <!-- Row Selection Checkbox -->
+        <td *ngIf="enableSelection" class="text-center">
+          <input type="checkbox" [(ngModel)]="row.selected" />
+        </td>
+        <td *ngFor="let column of columns" class="text-center">
+          <!-- Action Buttons -->
+          <ng-container *ngIf="column.type === 'action'">
+            <ng-container *ngFor="let action of column.actions">
+              <button
+                class="btn btn-outline-black"
+                (click)="performAction(action, row)"
+              >
+                {{ action.label }}
+              </button>
+            </ng-container>
+          </ng-container>
+
+          <!-- Status Badge -->
+          <ng-container *ngIf="column.type === 'status'">
+            <span [ngClass]="getStatusBadge(row[column.field])" class="badge">
+              {{ row[column.field] }}
+            </span>
+          </ng-container>
+
+          <ng-container *ngIf="column.type === 'dropdown'">
+            <select
+              class="form-select form-select-sm"
+              [(ngModel)]="row[column.field]"
+              *ngIf="mode === 'edit' && editableColumns.includes(column.field)"
+            >
+              <option
+                *ngFor="let option of column.getOptions ? column.getOptions(row) : []"
+                [value]="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+          
+            <span
+              *ngIf="mode === 'readonly' || !editableColumns.includes(column.field)"
+            >
+              {{ row[column.field] }}
+            </span>
+          </ng-container>
+          
+
+          <!-- Editable Input Field (excluding dropdowns/status/actions) -->
+          <ng-container
+            *ngIf="!['action', 'status', 'dropdown'].includes(column.type)"
+          >
+            <ng-container *ngIf="mode === 'edit'">
+              <input
+                *ngIf="editableColumns.includes(column.field)"
+                class="form-control form-control-sm"
+                [(ngModel)]="row[column.field]"
+              />
+              <span *ngIf="!editableColumns.includes(column.field)">
+                {{ row[column.field] }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="mode === 'readonly'">
+              {{ row[column.field] }}
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

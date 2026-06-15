@@ -1,0 +1,10 @@
+{
+  "library": "spring-mvc",
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true,
+  "useJakartaEe": true,
+  "interfaceOnly": false,
+  "java8": false,
+  "javaVersion": "17",
+  "useTags": true
+}

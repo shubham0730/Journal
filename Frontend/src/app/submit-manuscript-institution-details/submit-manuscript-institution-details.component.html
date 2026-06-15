@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container mt-4">
+        <h3>Authors and Institutions</h3>
+
+        <div class="alert alert-info">
+            <h6>INSTRUCTIONS FOR ADDING AUTHORS:</h6>
+            <ul>
+                <li>Add complete details of all contributors involved in this manuscript.</li>
+                <li>Ensure email addresses are accurate to avoid review delays.</li>
+                <li>Once submitted, co-authors cannot be added later.</li>
+                <li>Use 'Author Reordering' to arrange contributor order.</li>
+                <li>Only the submitting author can access the manuscript dashboard.</li>
+            </ul>
+        </div>
+
+        <div class="d-flex justify-content-end mb-2">
+            <button class="btn btn-custom-outline" (click)="openModal()">+ ADD AUTHORS</button>
+            <button class="btn btn-custom-outline" data-bs-toggle="modal" data-bs-target="#reorderAuthorsModal">AUTHOR REORDERING</button>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Institution</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Corresponding</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let author of authors; let i = index">
+                    <td>{{ author.title }} {{ author.firstName }} {{ author.middleName }} {{ author.lastName }}</td>
+                    <td>{{ author.email }}</td>
+                    <td>{{ author.department }}</td>
+                    <td>{{ author.institution }}</td>
+                    <td>{{ author.state }}</td>
+                    <td>{{ author.country }}</td>
+                    <td>{{ author.isCorresponding ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <button class="btn btn-sm " (click)="editAuthor(i)" title="Edit">
+                          <img src="assets/edit.svg" alt="preview" class="icon" style="height: 16px; width: 18px;">
+                        </button>
+                        <button class="btn btn-sm " (click)="deleteAuthor(i)" title="Delete">
+                          <img src="assets/delete.svg" alt="preview" class="icon" style="height: 16px; width: 18px;">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="d-flex justify-content-end mt-3">
+            
+            <div>
+              <button class="btn btn-custom-outline" (click)="goBack()">Back</button>
+                <button class="btn btn-custom-outline-primary" (click)="saveDetails()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Co-Author Modal -->
+    <div class="modal" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title">{{ editingIndex !== null ? 'Edit Author' : 'Add Author' }}</h5>
+                <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="coAuthorForm">
+                <div class="mb-3">
+                    <label class="form-label">Title *</label>
+                    <select class="form-select" formControlName="title">
+                      <option value="Mr">Mr</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Dr">Dr</option>
+                    </select>
+                  </div>
+                <div class="mb-3">
+                  <label class="form-label">First Name *</label>
+                  <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Middle Name</label>
+                  <input type="text" class="form-control" formControlName="middleName">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Last Name *</label>
+                  <input type="text" class="form-control" formControlName="lastName">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email *</label>
+                  <input type="email" class="form-control" formControlName="email">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Department *</label>
+                  <input type="text" class="form-control" formControlName="department">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Institution *</label>
+                  <input type="text" class="form-control" formControlName="institution">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">State *</label>
+                  <input type="text" class="form-control" formControlName="state">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Country *</label>
+                  <input type="text" class="form-control" formControlName="country">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">ORCID</label>
+                  <input type="text" class="form-control" formControlName="orcid">
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" formControlName="isCorresponding">
+                  <label class="form-check-label">Is Corresponding Author?</label>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+              <button type="button" class="btn btn-custom-outline-primary" (click)="saveCoAuthor()">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Author Reordering Modal -->
+    <div class="modal fade" id="reorderAuthorsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">Reorder Authors</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>                
+                <div class="modal-body">
+                    <div cdkDropList (cdkDropListDropped)="drop($event)">
+                        <div *ngFor="let author of authors" class="list-group-item d-flex justify-content-between align-items-center" cdkDrag>
+                            <span>{{ author.firstName }} {{ author.middleName }} {{ author.lastName }}</span>
+                            <span class="text-muted">⋮⋮</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-custom-outline" data-bs-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

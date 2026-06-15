@@ -1,0 +1,24 @@
+.footer {
+    background: #dc3545;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: white;
+  }
+ 

@@ -1,0 +1,37 @@
+.home-container {
+  font-family: 'Arial', sans-serif;
+}
+
+.hero {
+  background: url('/assets/lab-background.png') no-repeat center center/cover;
+  height: 600px;
+  position: relative;
+}
+
+.hero-overlay {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: none;
+  /* 👈 Explicitly removes any shadow */
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.about {
+  background: #f8f9fa;
+}
+
+.journal-card {
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.journal-card:hover {
+  transform: scale(1.05);
+}

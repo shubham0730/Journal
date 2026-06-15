@@ -1,0 +1,19 @@
+<div *ngIf="(isLoading$ | async) && !(isDialogOpen$ | async)" class="loader-overlay">
+  <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+  <div class="wrapper">
+    <!-- Navbar -->
+    <app-nav-bar></app-nav-bar>
+
+    <!-- Content -->
+    <div class="content">
+      <router-outlet></router-outlet> 
+    </div>
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>
+

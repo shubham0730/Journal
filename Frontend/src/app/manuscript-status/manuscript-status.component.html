@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <button class="btn btn-outline-secondary approve-btn" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+<!-- 
+<div *ngIf="isLoading" class="loader-overlay">
+  <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div> -->
+<app-tab-bar [tabs]="tabsToShow" (tabChange)="onTabChange($event)">
+</app-tab-bar>
+
+<!-- Manuscript Details Tab -->
+<div *ngIf="tabsToShow[activeTab] === 'Manuscript Details'">
+  <div *ngIf="manuscriptDetails.length === 0" class="no-data text-center">
+    <p class="text-muted">No manuscript details available.</p>
+  </div>
+
+  <app-edit-tablegrid *ngIf="manuscriptDetails.length > 0" [columns]="detailsColumns" [rows]="manuscriptDetails"
+    [enableSelection]="false">
+  </app-edit-tablegrid>
+</div>
+
+<!-- Manuscript Files Tab -->
+<div *ngIf="tabsToShow[activeTab] === 'Manuscript Files'">
+  <div *ngIf="manuscriptFiles.length === 0" class="no-data text-center">
+    <p class="text-muted">No manuscript files available.</p>
+  </div>
+
+  <app-edit-tablegrid *ngIf="manuscriptFiles.length > 0" [columns]="fileColumns" [rows]="manuscriptFiles"
+    [enableSelection]="false">
+  </app-edit-tablegrid>
+
+  <iframe *ngIf="fileUrl" [src]="fileUrl" width="100%" height="600px"></iframe>
+
+  <div class="text-end mt-3" *ngIf="userRole === 'SECTIONAL_REVIEWER' || userRole === 'EDITOR'">
+    <button class="btn btn-primary" (click)="sendForApproval()">Send for Approval</button>
+  </div>
+</div>
+<!-- Reviewers Tab -->
+<div *ngIf="tabsToShow[activeTab] === 'Reviewers'">
+  <div class="reviewer-actions d-flex justify-content-end mb-2">
+    <button mat-button color="primary" (click)="onAdd()" [disabled]="isModLocked">
+      Add Reviewers
+    </button>
+
+    <button mat-button color="warn" (click)="removeReviewers()" [disabled]="!hasSelectedReviewers() || isModLocked">
+      Remove Reviewers
+    </button>
+  </div>
+  <div *ngIf="reviewers.length === 0" class="no-data text-center">
+    <p class="text-muted">No reviewers assigned.</p>
+  </div>
+
+  <app-edit-tablegrid *ngIf="reviewers.length > 0" [columns]="reviewerColumns" [rows]="reviewers"
+    [enableSelection]="true">
+  </app-edit-tablegrid>
+</div>
+
+<div *ngIf="tabsToShow[activeTab] === 'View Reviews'">
+  <!-- Upload Button -->
+  <label for="fileUpload" class="btn btn-outline-secondary" [class.disabled]="isModLocked">
+    Upload Document
+  </label>
+  <input type="file" id="fileUpload" (change)="onFileSelected($event)" accept=".doc,.docx" multiple hidden
+    [disabled]="isModLocked" />
+
+  <!-- Display selected file names -->
+  <div *ngIf="selectedFiles.length > 0" class="mt-2">
+    <p>Selected Files:</p>
+    <ul>
+      <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+    </ul>
+  </div>
+
+  <!-- Upload Files Button -->
+  <button class="btn btn-outline-secondary" (click)="uploadPapers()"
+    [disabled]="selectedFiles.length === 0 || isModLocked">
+    Upload Files
+  </button>
+
+  <button class="btn btn-outline-secondary" (click)="generateReview()">
+    Generate Review
+  </button>
+
+  <!-- Iframe to display the document -->
+  <div *ngIf="fileUrl">
+    <iframe [src]="fileUrl" width="100%" height="600px"></iframe>
+  </div>
+</div>
+<!-- Manuscript Decision Tab -->
+<div *ngIf="tabsToShow[activeTab] === 'Manuscript Decision'">
+  <div class="text-center mb-3" *ngIf="userRole === 'EDITOR'">
+    <button class="btn btn-outline-secondary mx-1" (click)="openDecisionModal('Accept')"
+      [disabled]="isModLocked">Accept</button>
+    <button class="btn btn-outline-secondary mx-1" (click)="openDecisionModal('Revise')"
+      [disabled]="isModLocked">Revise</button>
+    <button class="btn btn-outline-secondary mx-1" (click)="openDecisionModal('Reject')"
+      [disabled]="isModLocked">Reject</button>
+  </div>
+
+  <div *ngIf="userRole !== 'EDITOR'" class="alert alert-warning text-center">
+    You do not have permission to take manuscript decisions.
+  </div>
+</div>
+
+<div *ngIf="tabsToShow[activeTab] === 'Resubmit' && isManuscriptLocked === false">
+
+  <app-resubmission-stepper [manuscriptId]="manuscriptId" [modNo]="fileMod"></app-resubmission-stepper>
+</div>

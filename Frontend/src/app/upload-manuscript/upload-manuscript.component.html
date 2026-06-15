@@ -1,0 +1,87 @@
+<div class="upload-container">
+  <div class="alert alert-info">
+    <h6>INSTRUCTIONS FOR UPLOADING DOCUMENTS:</h6>
+    <ul>
+      <li>Add file using drag and drop or by selecting the file in the gray box provided below. Please note you can upload only one file at a time.</li>
+      <li>Files uploaded successfully will appear at the bottom under table 'Uploaded Files'. You may click on the eye icon to preview the file.</li>
+      <li>Select the appropriate File Type for each document from the dropdown list.</li>
+      <li>You can upload only 1 First page and 1 Main article file in the system. Please upload only the latest document under these file types.</li>
+      <li>For Figures and videos, please mention the legends in 'LEGEND' column.</li>
+      <li>Add order number to the file using the 'FILE ORDER' column.</li>
+    </ul>
+    <p class="important">
+      IMPORTANT: DO NOT upload the revised manuscript file as a new file or under any other file type to avoid incorrect manuscript file being processed further.
+    </p>
+  </div>
+
+  <div 
+    class="drop-zone" 
+    (dragover)="onDragOver($event)" 
+    (drop)="onDrop($event)"
+    (click)="fileInput.click()"
+  >
+    <div class="drop-zone-content">
+      <span class="plus-icon">+</span>
+      <p>Drag and drop file here, or click to select file</p>
+    </div>
+  </div>
+  <input
+  #fileInput
+  type="file"
+  (change)="onFileSelected($event)"
+  accept=".doc,.docx,.jpg,.png"
+  style="display: none"
+/>
+
+    <div class="uploaded-files" *ngIf="uploadedFiles.length">
+      <h4>Uploaded Files</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>File Name</th>
+            <th>File Type</th>
+            <th>Legend</th>
+            <th>File Size</th>
+            <th>File Order</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of uploadedFiles">
+            <td>{{ file.id }}</td>
+            <td>{{ file.fileName }}</td>
+            <td>
+              <select [(ngModel)]="file.fileType">
+                <option value="">Select File Type</option>
+                <option value="First Page">First Page</option>
+                <option value="Main Article">Main Article</option>
+                <option value="Supplementary">Supplementary</option>
+                <option value="Images">Images</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="file.legend">
+            </td>
+            <td>{{ file.fileSize }}</td>
+            <td>
+              <input type="number" [(ngModel)]="file.fileOrder" min="1">
+            </td>
+            <td class="actions">
+              <button (click)="previewFile(file)" title="Preview">
+                <img src="assets/preview.svg" alt="preview" class="icon" style="height: 16px; width: 18px;">
+              </button>
+              <button (click)="deleteFile(file)" title="Delete">
+                <img src="assets/delete.svg" alt="delete" class="icon" style="height: 16px; width: 18px;">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="button-container">
+      <button class="btn-custom-outline" (click)="returnHome()"  >Back</button>
+      <button class="btn btn-custom-outline-primary" (click)="saveAndContinue()">Next</button>
+    </div>
+  </div>

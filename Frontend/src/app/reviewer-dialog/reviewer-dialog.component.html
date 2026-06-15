@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Select Reviewers</h2>
+<!-- <div *ngIf="isLoading" class="loader-overlay">
+  <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div> -->
+
+<mat-dialog-content>
+  <app-edit-tablegrid
+    *ngIf="reviewers.length > 0"
+    [columns]="reviewerColumns"
+    [rows]="reviewers"
+    [enableSelection]="reviewerEnableSelection">
+  </app-edit-tablegrid>
+
+  <app-pagination
+    [offset]="offsetReviewers"
+    [totalPagesApproved]="totalPagesReviewers"
+    (offsetChange)="onOffsetReviewersChange($event)">
+  </app-pagination>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button color="primary" (click)="assignSelectedReviewers()">Confirm</button>
+</mat-dialog-actions>

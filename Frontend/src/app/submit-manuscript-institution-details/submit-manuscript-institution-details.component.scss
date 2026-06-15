@@ -1,0 +1,171 @@
+/* Increase Modal Width */
+.modal-dialog {
+  max-width: 800px; /* Adjust width as needed */
+  width: 90%;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h5, .modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table th {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.table td {
+  font-size: 14px;
+}
+
+.form-label {
+  font-size: 14px;
+}
+
+.alert-info {
+  background-color: rgb(154, 152, 152) !important;
+  border-color: rgb(154, 152, 152) !important;
+  color: black !important;
+}
+
+.btn-custom-outline {
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid black !important;
+  padding: 12px 24px;
+  margin: 5px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+}
+
+.btn-custom-outline-primary {
+  color: white !important;
+  background-color: #EF3052  !important;
+  border: 1px solid white !important;
+  padding: 12px 24px;
+  margin: 5px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+}
+
+.btn-custom-outline:hover {
+  background-color: black !important;
+  color: white !important;
+  border-color: black !important;
+}
+
+.btn-custom-outline-primary:hover {
+  background-color: black !important;
+  color: white !important;
+  border-color: black !important;
+}
+
+/* Modal Enhancements */
+.modal-content {
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.modal-header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-footer {
+  background: #f8f9fa;
+  border-top: 2px solid #dee2e6;
+  padding: 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-select {
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.d-flex input {
+  max-width: 80%;
+}
+
+/* Table Gridlines with Curvy Corners */
+.table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden; /* Ensures rounded corners apply properly */
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border: 1px solid black !important;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Apply border-radius only to the top-left and top-right corners of the first row */
+.table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Apply border-radius only to the bottom-left and bottom-right corners of the last row */
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+/* Table Header Styling */
+.table thead th {
+  background-color: rgb(154, 152, 152) !important;
+  color: black !important;
+}
+
+.btn-custom-outline-primary {
+  color: white !important;
+  background-color: #EF3052  !important;
+  border: 1px solid white !important;
+  padding: 12px 24px;
+  margin: 5px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+}

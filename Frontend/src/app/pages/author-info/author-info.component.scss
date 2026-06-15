@@ -1,0 +1,33 @@
+.container {
+  width: 80%;
+  margin: 20px auto;
+  background: #fff;
+  padding-top: 2rem;
+  padding-right: 4rem; 
+  padding-left: 4rem;
+  padding-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+ul {
+  padding-left: 20px;
+}
+.section {
+  margin-bottom: 20px;
+}
+.section h2 {
+  border-bottom: 2px solid ;
+  padding-bottom: 5px;
+}
+.checklist ul {
+  list-style-type: none;
+}
+.checklist ul li::before {
+  content: "✔";
+  color: green;
+  margin-right: 10px;
+}

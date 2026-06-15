@@ -1,0 +1,35 @@
+<!-- Full-Screen Loader -->
+<!-- <div *ngIf="isLoading" class="loader-overlay">
+  <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div> -->
+
+<app-tab-bar
+  [tabs]="['View Manuscripts']"
+  (tabChange)="onTabChange($event)"
+></app-tab-bar>
+
+<!-- View Editors Tab -->
+<div *ngIf="activeTab === 0">
+  <div *ngIf="paperRows.length === 0" class="no-data text-center">
+    <p class="text-muted">No papers available.</p>
+  </div>
+
+  <app-edit-tablegrid
+  *ngIf="paperRows.length > 0"
+  [columns]="viewColumns"
+  [rows]="paperRows"
+  [enableSelection]="paperEnableSelection"
+  [getStatusBadge]="getStatusBadge"
+  [mode]="'edit'"
+  [editableColumns]="['version']" 
+></app-edit-tablegrid>
+
+  <app-pagination
+    [offset]="offsetPaper"
+    [totalPagesApproved]="totalPagesPaper"
+    (offsetChange)="onOffsetPaperChange($event)"
+  >
+  </app-pagination>
+</div>

@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <span class="fw-bold text-danger">JOROCO</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/current-issue">Current Issue</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/previous-issues">Previous Issues</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="publicationsDropdown" role="button" data-bs-toggle="dropdown">For Authors</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/author/info">Information for Authors</a></li>
+            <li><a class="dropdown-item" (click)="submitManuscript()">Submit a Manuscript</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/published-ahead-of-print">Published Ahead of Print</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="journalDropdown" role="button" data-bs-toggle="dropdown">Journal Info</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/journal-info/about-journal">About Journal</a></li>
+            <li><a class="dropdown-item" routerLink="/journal-info/editorial-board">Editorial Board</a></li>
+            <li><a class="dropdown-item" routerLink="/journal-info/affiliated-society">Affiliated Society</a></li>
+            <li><a class="dropdown-item" routerLink="/journals/advertising">Advertising</a></li>
+            <li><a class="dropdown-item" routerLink="/journals/subscriptions">Subscriptions</a></li>
+            <li><a class="dropdown-item" routerLink="/journals/reprints">Reprints</a></li>
+            <li><a class="dropdown-item" routerLink="/journals/rights-and-permissions">Rights and Permissions</a></li>
+          </ul>
+        </li>
+
+        <!-- Profile Icon for Logged-in Users -->
+        <li class="nav-item" *ngIf="isLoggedIn; else loginOption">
+          <a class="nav-link profile-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#profileSidebar">
+            <img src="assets/user.svg" alt="Login" class="icon">
+          </a>
+        </li>
+
+        <!-- Login Option for Guests -->
+        <ng-template #loginOption>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">
+              <img src="assets/user.svg" alt="Login Icon" class="icon"> 
+            </a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Offcanvas Sidebar -->
+<div #profileSidebar class="offcanvas offcanvas-end profile-drawer" tabindex="-1" id="profileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">👤 Profile</h5>
+    <button type="button" class="btn-close text-reset" (click)="closeSidebar()"></button>
+  </div>
+  
+  <div class="offcanvas-body">
+    <ul class="list-group profile-menu">
+      <li *ngFor="let item of profileMenuItems" 
+      [class.text-danger]="item.label === '🚪 Logout'"
+      (click)="item.action ? item.action() : navigate(item.link)">
+    {{ item.label }}
+  </li>
+    </ul>
+    
+  </div>
+</div>

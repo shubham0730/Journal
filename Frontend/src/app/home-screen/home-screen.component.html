@@ -1,0 +1,42 @@
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-overlay">
+        <!-- <div class="hero-content text-center">
+          <h1>Welcome to Journal of Radiation Oncology and Clinical Oncology</h1>
+          <p>Explore the latest research and advancements in medical science.</p>
+          <a routerLink="/journals" class="btn btn-danger">View Journals</a>
+        </div> -->
+      </div>
+    </section>
+  
+    <!-- About Section
+    <section class="about py-5">
+      <div class="container text-center">
+        <h2>About Us</h2>
+        <p>
+          Nanavati Max Super Speciality Hospital Medical Journals is dedicated to publishing high-quality research
+          in the field of medical sciences, bringing innovation and knowledge to the healthcare community.
+        </p>
+      </div>
+    </section>
+   -->
+    <!-- Latest Journals Section -->
+    <section class="journals py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Trending</h2>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let journal of latestJournals">
+            <div class="card journal-card">
+              <div class="card-body">
+                <h5 class="card-title">{{ journal.title }}</h5>
+                <h5 class="card-text">{{ journal.summary }}</h5>
+                <a [routerLink]="'/journal/' + journal.id" class="btn btn-danger">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

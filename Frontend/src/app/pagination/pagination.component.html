@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center align-items-center">
+    <button class="btn btn-outline-black me-2" (click)="firstPage()" [disabled]="offset === 0">
+      « First
+    </button>
+    
+    <button class="btn btn-outline-black me-2" (click)="prevPage()" [disabled]="offset === 0">
+      ‹ Prev
+    </button>
+  
+    <span class="fw-bold mx-2">Page</span>
+    
+    <input 
+      type="number" 
+      class="form-control d-inline mx-2" 
+      style="width: 60px; text-align: center;"
+      [value]="offset + 1" 
+      (change)="goToPage($event)"
+      min="1"
+      [max]="totalPagesApproved"
+    />
+  
+    <span class="fw-bold mx-2">of {{ totalPagesApproved }}</span>
+  
+    <button class="btn btn-outline-black me-2" (click)="nextPage()" [disabled]="offset >= totalPagesApproved - 1">
+      Next ›
+    </button>
+  
+    <button class="btn btn-outline-black" (click)="lastPage()" [disabled]="offset >= totalPagesApproved - 1">
+      Last »
+    </button>
+  </div>
+  

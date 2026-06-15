@@ -1,0 +1,130 @@
+.upload-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  h6 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .instructions {
+    margin-bottom: 20px;
+  }
+
+  .instructions ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .instructions li {
+    margin-bottom: 10px;
+  }
+
+  .important {
+    color: rgb(190, 58, 58);
+    font-weight: bold;
+  }
+
+  .drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .drop-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+  }
+
+  .plus-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: rgb(154, 152, 152);
+    color: white;
+  }
+
+  .actions button {
+    font-size: 12px; /* Adjust font size */
+    padding: 4px 6px; /* Adjust padding */
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .actions button img {
+    width: 14px; /* Adjust icon size */
+    height: 14px;
+  }
+
+  .button-container button {
+    font-size: 14px; /* Adjust as needed */
+    padding: 8px 16px; /* Adjust padding if necessary */
+  }
+  
+
+  .btn-custom-outline {
+    color: black !important;
+    background-color: white !important;
+    border: 1px solid black !important;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    font-size: 14px;
+  }
+  
+  .btn-custom-outline-primary {
+    color: white !important;
+    background-color: #EF3052 !important;
+    border: 1px solid white !important;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    font-size: 14px;
+  }
+  
+  .btn-custom-outline:hover {
+    background-color: black !important;
+    color: white !important;
+    border-color: black !important;
+  }
+  
+  .alert-info {
+    background-color: rgb(154, 152, 152)  !important;
+    border-color: rgb(154, 152, 152)  !important;
+    color: black !important;
+  }
+
+  .btn-custom-outline-primary:hover {
+    background-color: black !important;
+    color: white !important;
+    border-color: black !important;
+  }
