@@ -1,4 +1,4 @@
-# Journal/ Research Paper Publishing Platform
+# Journal/Research Paper Publishing Platform
 
 A full-stack Journal Management System designed to simplify the process of manuscript submission, review, and publication workflow management. The application provides dedicated interfaces for authors, reviewers, editors, and administrators to manage the complete journal publishing lifecycle.
 
